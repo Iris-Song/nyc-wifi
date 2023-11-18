@@ -6,230 +6,51 @@ $(function () {
     ceshis3();
     ceshis4();
 
+    //散点图
     function ceshis() {
         var myChart = echarts.init(document.getElementById('chart1'));
-
-        option = {
-            /*backgroundColor: '#05163B',*/
-            tooltip: {
-                trigger: 'axis'
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    mark: {
-                        show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
-                    },
-                    saveAsImage: {
-                        show: true
-                    }
-                }
-            },
-            grid: {
-                top: 'middle',
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                top: '10%',
-                containLabel: true
-            },
-            legend: {
-                data: ['压力', '温度', '累计', '累计2'],
-                textStyle: {
-                    color: "#fff"
-                }
-
-            },
-            xAxis: [{
-                type: 'category',
-                data: ['挖土方(m³)', '挖石方(m³)', '填方(m³)', '涵洞通道(道)', '桩基(根)', '承台(个)', '墩柱（含肋板）(根)', '台帽盖梁(个)', '梁板预制(片)', '梁板安装(片)', '桥面铺装(㎡)', '防撞护栏(m)',
-                    '明洞(米)', '主动掘进(米)', '初期支护(米)', '二次衬砌(米)', '水稳底基层(米)', '水稳基层(第一层)(米)', '水稳基层(第二层)(米)', '上基层(米)', '沥青下面层(米)', '沥青上面层(米)',
-                ],
-                axisLabel: {
-                    show: true,
-                    textStyle: {
-                        color: "#ebf8ac" //X轴文字颜色
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#01FCE3'
-                    }
-                },
+        var location = []
+        var option = {
+            color: ['green'],
+            xAxis: { scale: true, name: 'latitude', axisLabel: {
+                "color": "#fff","fontSize": 16
+            }, nameTextStyle: {
+                "color": "#fff","fontSize": 16
+            },},
+            yAxis: { scale: true, name: 'longitute', axisLabel: {
+                "color": "#fff","fontSize": 16
+            }, nameTextStyle: {
+                "color": "#fff","fontSize": 16
+            },},
+            series: [{
+                type: 'scatter', 
+                data: location,
             }],
-            yAxis: [{
-                type: 'value',
-                name: '压力',
-                axisLabel: {
-                    formatter: '{value} KPa',
-                    textStyle: {
-                        color: "#2EC7C9" //X轴文字颜色
-                    }
-                },
-                axisLine: {
-                    lineStyle: {
-                        color: '#01FCE3'
-                    }
-                },
-            },
-                {
-                    type: 'value',
-                    name: '温度',
-                    axisLabel: {
-                        formatter: '{value} °C',
-                        textStyle: {
-                            color: "#2EC7C9" //X轴文字颜色
-                        }
-                    },axisLine: {
-                        lineStyle: {
-                            color: '#01FCE3'
-                        }
-                    },
-                }
-            ],
-            series: [
-
-                {
-                    name: '压力',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            barBorderRadius: 5,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: "#00FFE3"
-                            },
-                                {
-                                    offset: 1,
-                                    color: "#4693EC"
-                                }
-                            ])
-                        }
-                    },
-                    /*data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]*/
-                    data: [26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 58.8, 16.0, 32.3, 30.3, 21.3, 66.3, 41.3, 15.3, 30.3, 22.3, 12.3, 82.3, 72.3, 62.3, 52.3, 42.3, 36.6],
-                },
-                {
-                    name: '温度',
-                    type: 'bar',
-                    itemStyle: {
-                        normal: {
-                            barBorderRadius: 5,
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: "#C1B2EA"
-                            },
-                                {
-                                    offset: 1,
-                                    color: "#8362C6"
-                                }
-                            ])
-                        }
-                    },
-                    data: [26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 58.8, 16.0, 32.3, 30.3, 21.3, 66.3, 41.3, 15.3, 30.3, 22.3, 12.3, 82.3, 72.3, 62.3, 52.3, 42.3, 36.6],
-                },
-                {
-                    name: '累计',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    data: [26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 58.8, 16.0, 32.3, 30.3, 21.3, 66.3, 41.3, 15.3, 30.3, 22.3, 12.3, 82.3, 72.3, 62.3, 52.3, 42.3, 36.6],
-                    lineStyle: {
-                        normal: {
-                            width: 5,
-                            color: {
-                                type: 'linear',
-
-                                colorStops: [{
-                                    offset: 0,
-                                    color: '#AAF487' // 0% 处的颜色
-                                },
-                                    {
-                                        offset: 0.4,
-                                        color: '#47D8BE' // 100% 处的颜色
-                                    }, {
-                                        offset: 1,
-                                        color: '#47D8BE' // 100% 处的颜色
-                                    }
-                                ],
-                                globalCoord: false // 缺省为 false
-                            },
-                            shadowColor: 'rgba(71,216,190, 0.5)',
-                            shadowBlur: 10,
-                            shadowOffsetY: 7
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#AAF487',
-                            borderWidth: 10,
-                            /*shadowColor: 'rgba(72,216,191, 0.3)',
-                             shadowBlur: 100,*/
-                            borderColor: "#AAF487"
-                        }
-                    },
-                    smooth: true,
-                },
-                {
-                    name: '累计2',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    data: [26.4, 28.7, 70.7, 75.6, 82.2, 48.7, 58.8, 16.0, 32.3, 30.3, 21.3, 66.3, 41.3, 15.3, 30.3, 22.3, 12.3, 82.3, 72.3, 62.3, 52.3, 42.3, 36.6],
-                    lineStyle: {
-                        normal: {
-                            width: 5,
-                            color: {
-                                type: 'linear',
-
-                                colorStops: [{
-                                    offset: 0,
-                                    color: '#F8B854' // 0% 处的颜色
-                                },
-                                    {
-                                        offset: 0.4,
-                                        color: '#DE801C' // 100% 处的颜色
-                                    }, {
-                                        offset: 1,
-                                        color: '#DE801C' // 100% 处的颜色
-                                    }
-                                ],
-                                globalCoord: false // 缺省为 false
-                            },
-                            shadowColor: 'rgba(71,216,190, 0.5)',
-                            shadowBlur: 10,
-                            shadowOffsetY: 7
-                        }
-                    },
-                    itemStyle: {
-                        normal: {
-                            color: '#F7AD3E',
-                            borderWidth: 10,
-                            /*shadowColor: 'rgba(72,216,191, 0.3)',
-                             shadowBlur: 100,*/
-                            borderColor: "#F7AD3E"
-                        }
-                    },
-                    smooth: true,
-                }
-            ]
         };
+        $.ajax({
+            url: "https://data.cityofnewyork.us/resource/yjub-udmw.json?$where=within_circle(location_lat_long, 40.69324, -73.96282, 5000000)",
+            type: "GET",
+            data: {
+              "$limit" : 1000000,
+              "$$app_token" : 'uZfksfq7g9hmfGj5OCFmyzj2Y'
+            }
+        }).done(function(data) {
+        //   console.log(data);
+          data.forEach(element => {
+            let tmp = [element.location_lat_long.latitude,element.location_lat_long.longitude]
+            location.push(tmp)
+          });
+        //   console.log(location)
+          myChart.setOption(option);
+        });
+
 
         // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
         window.addEventListener("resize",function(){
             myChart.resize();
         });
     }
+
 
     function ceshis1() {
         var myChart = echarts.init(document.getElementById('chart2'));
