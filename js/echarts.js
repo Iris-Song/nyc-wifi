@@ -1,10 +1,10 @@
 $(function () {
 
     ceshis();
-    ceshis1();
-    ceshis2();
-    ceshis3();
-    ceshis4();
+    // ceshis1();
+    // ceshis2();
+    // ceshis3();
+    // ceshis4();
     ceshis6();
 
     //散点图
