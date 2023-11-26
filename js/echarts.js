@@ -56,10 +56,6 @@ $(function () {
 
         // Define options for the pie chart
         var option = {
-            title: {
-                text: 'Pie Chart Example',
-                left: 'center'
-            },
             tooltip: {
                 trigger: 'item'
             },
@@ -67,6 +63,7 @@ $(function () {
                 orient: 'vertical',
                 left: 'left'
             },
+            color: ["#8d7fec", "#5085f2", "#e75fc3"],
             series: [
                 {
                     name: 'Category',
@@ -77,8 +74,11 @@ $(function () {
                         itemStyle: {
                             shadowBlur: 10,
                             shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            shadowColor: 'rgba(5, 0, 0, 0.5)'
                         }
+                    },
+                    textStyle: {
+                        color: '#fff'
                     }
                 }
             ]
