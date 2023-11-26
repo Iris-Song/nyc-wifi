@@ -1,7 +1,7 @@
 $(function () {
 
     ceshis();
-    // ceshis1();
+    ceshis1();
     // ceshis2();
     // ceshis3();
     // ceshis4();
@@ -93,7 +93,7 @@ $(function () {
                 "$$app_token": "XSsZaomgpDdviVNxAbA1UeDXV"
             }
         }).done(function(data) {
-            console.log(data)
+            // console.log(data)
             var categoryCounts = {};
             data.forEach(function(item) {
                 var category = item.type;
@@ -109,7 +109,7 @@ $(function () {
             for (var category in categoryCounts) {
                 pieData.push({ value: categoryCounts[category], name: category });
             }
-            console.log(pieData)
+            // console.log(pieData)
             // Update pie chart data
             option.series[0].data = pieData;
             myChart.setOption(option);
@@ -126,7 +126,6 @@ $(function () {
     function ceshis1() {
         var myChart = echarts.init(document.getElementById('chart2'));
 
-        // var ydata = [{
         //     name: '财务管理决策实训',
         //     value: 18
         // },
@@ -168,29 +167,10 @@ $(function () {
         //     }
         // ];
         var color = ["#8d7fec", "#5085f2", "#e75fc3", "#f87be2", "#f2719a"]
-        // var xdata = ['财务管理决策实训', "商品流通业实训", "暖心陪伴（津乐园20cm定制蛋糕）", "嘉果荟萃（津乐园20cm定制蛋糕）", '优雅圆舞曲（津乐园20cm）', '巧克力之夏（津乐园20cm定制蛋糕）', '财税宝4G', '成本会计', '纳税会计与筹划', '金融担保业实训'];
         var ydata = [];
         var xdata = ['Brooklyn', 'Queens', 'Staten Island', 'Manhattan', 'Bronx'];
 
-        $.ajax({
-            url: 'https://data.cityofnewyork.us/resource/yjub-udmw.json?',
-            type: 'GET',
-            data: '$select=boroname,COUNT(OBJECTID)&$group=boroname'
-        }).done(function (data) {
-            console.log(data);
-            data.forEach(element => {
-                ydata.push({ name: element['boroname'], value: Number(element['COUNT_OBJECTID']) })
-            });
-            console.log(ydata);
-            myChart.setOption(option);
-        }).fail({
-            function() {
-            console.log("fail");
-        }
-        });
-
         option = {
-            // backgroundColor: "rgba(255,255,255,1)",
             color: color,
             legend: {
                 orient: "vartical",
@@ -204,17 +184,6 @@ $(function () {
                 textStyle: {
                     color: '#fff'
                 },
-                /*itemGap: 16,*/
-                /*formatter:function(name){
-                  var oa = option.series[0].data;
-                  var num = oa[0].value + oa[1].value + oa[2].value + oa[3].value+oa[4].value + oa[5].value + oa[6].value + oa[7].value+oa[8].value + oa[9].value ;
-                  for(var i = 0; i < option.series[0].data.length; i++){
-                      if(name==oa[i].name){
-                          return ' '+name + '    |    ' + oa[i].value + '    |    ' + (oa[i].value/num * 100).toFixed(2) + '%';
-                      }
-                  }
-                }*/
-
                 formatter: function(name) {
                     return '' + name
                 }
@@ -264,6 +233,26 @@ $(function () {
             }]
         };
 
+        $.ajax({
+            url: 'https://data.cityofnewyork.us/resource/yjub-udmw.json?$select=boroname,COUNT(OBJECTID)&$group=boroname',
+            type: 'GET',
+            data: {
+                "$limit": 10000000,
+                "$$app_token": "XSsZaomgpDdviVNxAbA1UeDXV"
+            }
+        }).done(function (data) {
+            console.log(data);
+            data.forEach(element => {
+                ydata.push({ name: element['boroname'], value: Number(element['COUNT_OBJECTID']) })
+            });
+            console.log(ydata);
+            myChart.setOption(option);
+        }).fail({
+            function() {
+            console.log("fail");
+        }
+        });
+
         setTimeout(function() {
             myChart.on('mouseover', function(params) {
                 if (params.name == ydata[0].name) {
@@ -295,8 +284,6 @@ $(function () {
             });
         }, 1000);
 
-        // 使用刚指定的配置项和数据显示图表。
-        /*myChart.setOption(option);*/
         window.addEventListener("resize",function(){
             myChart.resize();
         });
