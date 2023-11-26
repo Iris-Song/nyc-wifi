@@ -2,7 +2,7 @@ $(function () {
 
     ceshis();
     ceshis1();
-    // ceshis2();
+    ceshis2();
     // ceshis3();
     // ceshis4();
     ceshis6();
@@ -291,200 +291,67 @@ $(function () {
     function ceshis2() {
         var myChart = echarts.init(document.getElementById('chart3'));
 
-        option = {
-            /*backgroundColor: '#000',*/
-            "animation": true,
-            "title": {
-                /*"text": 24,*/
-               /* "subtext": "沥青工",*/
-                "x": "center",
-                "y": "center",
-                "textStyle": {
-                    "color": "#fff",
-                    "fontSize": 10,
-                    "fontWeight": "normal",
-                    "align": "center",
-                    "width": "200px"
-                },
-                "subtextStyle": {
-                    "color": "#fff",
-                    "fontSize": 12,
-                    "fontWeight": "normal",
-                    "align": "center"
+        var option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Category',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [], // Data will be populated later
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(5, 0, 0, 0.5)'
+                        }
+                    },
+                    textStyle: {
+                        color: '#fff'
+                    }
                 }
-            },
-            "legend": {
-                "width": "100%",
-                "left": "center",
-                "textStyle": {
-                    "color": "#fff",
-                    "fontSize": 12
-                },
-                "icon": "circle",
-                "right": "0",
-                "bottom": "0",
-                "padding": [70, 20],
-                "itemGap": 5,
-                "data": ["测量工", "电焊工", "钢筋工", "沥青工", "安装工", "起重工", "养护工", "其它"]
-            },
-            "series": [{
-                "type": "pie",
-                "center": ["50%", "40%"],
-                "radius": ["20%", "43%"],
-                "color": ["#FEE449", "#00FFFF", "#00FFA8", "#9F17FF", "#FFE400", "#F76F01", "#01A4F7", "#FE2C8A"],
-                "startAngle": 135,
-                "labelLine": {
-                    "normal": {
-                        "length": 15
-                    }
-                },
-                "label": {
-                    "normal": {
-                        "formatter": "{b|{b}:}  {per|{d}%} ",
-                        "backgroundColor": "rgba(255, 147, 38, 0)",
-                        "borderColor": "transparent",
-                        "borderRadius": 4,
-                        "rich": {
-                            "a": {
-                                "color": "#999",
-                                "lineHeight": 12,
-                                "align": "center"
-                            },
-                            "hr": {
-                                "borderColor": "#aaa",
-                                "width": "100%",
-                                "borderWidth": 1,
-                                "height": 0
-                            },
-                            "b": {
-                                "color": "#b3e5ff",
-                                "fontSize": 16,
-                                "lineHeight": 33
-                            },
-                            "c": {
-                                "fontSize": 14,
-                                "color": "#eee"
-                            },
-                            "per": {
-                                "color": "#FDF44E",
-                                "fontSize": 14,
-                                "padding": [5, 8],
-                                "borderRadius": 2
-                            }
-                        },
-                        "textStyle": {
-                            "color": "#fff",
-                            "fontSize": 16
-                        }
-                    }
-                },
-                "emphasis": {
-                    "label": {
-                        "show": true,
-                        "formatter": "{b|{b}:}  {per|{d}%}  ",
-                        "backgroundColor": "rgba(255, 147, 38, 0)",
-                        "borderColor": "transparent",
-                        "borderRadius": 4,
-                        "rich": {
-                            "a": {
-                                "color": "#999",
-                                "lineHeight": 22,
-                                "align": "center"
-                            },
-                            "hr": {
-                                "borderColor": "#aaa",
-                                "width": "100%",
-                                "borderWidth": 1,
-                                "height": 0
-                            },
-                            "b": {
-                                "color": "#fff",
-                                "fontSize": 14,
-                                "lineHeight": 33
-                            },
-                            "c": {
-                                "fontSize": 14,
-                                "color": "#eee"
-                            },
-                            "per": {
-                                "color": "#FDF44E",
-                                "fontSize": 14,
-                                "padding": [5, 6],
-                                "borderRadius": 2
-                            }
-                        }
-                    }
-                },
-                "data": [{
-                    "name": "测量工",
-                    "value": 3
-                }, {
-                    "name": "电焊工",
-                    "value": 2
-                }, {
-                    "name": "钢筋工",
-                    "value": 26
-                }, {
-                    "name": "沥青工",
-                    "value": 24
-                }, {
-                    "name": "安装工",
-                    "value": 12
-                }, {
-                    "name": "起重工",
-                    "value": 11
-                }, {
-                    "name": "养护工",
-                    "value": 3
-                }, {
-                    "name": "其它",
-                    "value": 2
-                }]
-            }, {
-                "type": "pie",
-                "center": ["50%", "40%"],
-                "radius": ["15%", "14%"],
-                "label": {
-                    "show": false
-                },
-                "data": [{
-                    "value": 78,
-                    "name": "实例1",
-                    "itemStyle": {
-                        "normal": {
-                            "color": {
-                                "x": 0,
-                                "y": 0,
-                                "x2": 1,
-                                "y2": 0,
-                                "type": "linear",
-                                "global": false,
-                                "colorStops": [{
-                                    "offset": 0,
-                                    "color": "#9F17FF"
-                                }, {
-                                    "offset": 0.2,
-                                    "color": "#01A4F7"
-                                }, {
-                                    "offset": 0.5,
-                                    "color": "#FE2C8A"
-                                }, {
-                                    "offset": 0.8,
-                                    "color": "#FEE449"
-                                }, {
-                                    "offset": 1,
-                                    "color": "#00FFA8"
-                                }]
-                            }
-                        }
-                    }
-                }]
-            }]
-        }
+            ]
+        };
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-        window.addEventListener("resize",function(){
+        // AJAX request to fetch data
+        $.ajax({
+            url: "https://data.cityofnewyork.us/resource/yjub-udmw.json",
+            type: "GET",
+            data: {
+                "$limit": 10000000,
+                "$$app_token": "XSsZaomgpDdviVNxAbA1UeDXV"
+            }
+        }).done(function(data) {
+            // console.log(data)
+            var categoryCounts = {};
+            data.forEach(function(item) {
+                var category = item.provider;
+                if (categoryCounts[category]) {
+                    categoryCounts[category]++;
+                } else {
+                    categoryCounts[category] = 1;
+                }
+            });
+
+            // Convert processed data into a format suitable for ECharts
+            var pieData = [];
+            for (var category in categoryCounts) {
+                pieData.push({ value: categoryCounts[category], name: category });
+            }
+            // console.log(pieData)
+            // Update pie chart data
+            option.series[0].data = pieData;
+            myChart.setOption(option);
+        });
+
+        // Resize chart on window resize
+        window.addEventListener("resize", function() {
             myChart.resize();
         });
     }
