@@ -1,10 +1,11 @@
 $(function () {
 
     ceshis();
-    ceshis1();
-    ceshis2();
-    ceshis3();
-    ceshis4();
+    // ceshis1();
+    // ceshis2();
+    // ceshis3();
+    // ceshis4();
+    ceshis6();
 
     //散点图
     function ceshis() {
@@ -32,7 +33,7 @@ $(function () {
             type: "GET",
             data: {
               "$limit" : 1000000,
-              "$$app_token" : 'uZfksfq7g9hmfGj5OCFmyzj2Y'
+              "$$app_token" : 'XSsZaomgpDdviVNxAbA1UeDXV'
             }
         }).done(function(data) {
         //   console.log(data);
@@ -47,6 +48,75 @@ $(function () {
 
         // 使用刚指定的配置项和数据显示图表。
         window.addEventListener("resize",function(){
+            myChart.resize();
+        });
+    }
+    function ceshis6() {
+        var myChart = echarts.init(document.getElementById('chart6'));
+
+        // Define options for the pie chart
+        var option = {
+            title: {
+                text: 'Pie Chart Example',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: 'Category',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [], // Data will be populated later
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // AJAX request to fetch data
+        $.ajax({
+            url: "https://data.cityofnewyork.us/resource/yjub-udmw.json",
+            type: "GET",
+            data: {
+                "$limit": 10000000,
+                "$$app_token": "XSsZaomgpDdviVNxAbA1UeDXV"
+            }
+        }).done(function(data) {
+            console.log(data)
+            var categoryCounts = {};
+            data.forEach(function(item) {
+                var category = item.type;
+                if (categoryCounts[category]) {
+                    categoryCounts[category]++;
+                } else {
+                    categoryCounts[category] = 1;
+                }
+            });
+
+            // Convert processed data into a format suitable for ECharts
+            var pieData = [];
+            for (var category in categoryCounts) {
+                pieData.push({ value: categoryCounts[category], name: category });
+            }
+            console.log(pieData)
+            // Update pie chart data
+            option.series[0].data = pieData;
+            myChart.setOption(option);
+        });
+
+        // Resize chart on window resize
+        window.addEventListener("resize", function() {
             myChart.resize();
         });
     }
