@@ -61,7 +61,10 @@ $(function () {
             },
             legend: {
                 orient: 'vertical',
-                left: 'left'
+                left: 'left',
+        textStyle: {
+            color: '#fff'
+        }
             },
             color: ["#8d7fec", "#5085f2", "#e75fc3"],
             series: [
@@ -311,9 +314,6 @@ $(function () {
                             shadowOffsetX: 0,
                             shadowColor: 'rgba(5, 0, 0, 0.5)'
                         }
-                    },
-                    textStyle: {
-                        color: '#fff'
                     }
                 }
             ]
