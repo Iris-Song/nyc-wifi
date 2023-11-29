@@ -13,12 +13,12 @@ $(function () {
         var location = []
         var option = {
             color: ['green'],
-            xAxis: { scale: true, name: 'latitude', axisLabel: {
+            xAxis: { scale: true, name: 'longitute', axisLabel: {
                 "color": "#fff","fontSize": 16
             }, nameTextStyle: {
                 "color": "#fff","fontSize": 16
             },},
-            yAxis: { scale: true, name: 'longitute', axisLabel: {
+            yAxis: { scale: true, name: 'latitude', axisLabel: {
                 "color": "#fff","fontSize": 16
             }, nameTextStyle: {
                 "color": "#fff","fontSize": 16
