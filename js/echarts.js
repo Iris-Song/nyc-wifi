@@ -38,7 +38,7 @@ $(function () {
         }).done(function(data) {
         //   console.log(data);
           data.forEach(element => {
-            let tmp = [element.location_lat_long.latitude,element.location_lat_long.longitude]
+            let tmp = [element.location_lat_long.longitude,element.location_lat_long.latitude,]
             location.push(tmp)
           });
         //   console.log(location)
